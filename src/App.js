@@ -8,7 +8,6 @@ function App() {
     const [authenticatedUserName, setAuthenticatedUserName] = useState('');
 
 
-
     function logout() {
     }
 
@@ -20,7 +19,18 @@ function App() {
             <button onClick={logout}></button>
         </div>
     } else {
-       content = <LoginForm onLogin={(email) => setAuthenticatedUserName(email) }/>
+
+        content = <div><LoginForm onLogin={(email) => setAuthenticatedUserName(email)}
+                                  buttonLabel="zaloguj się"/>
+
+
+            <LoginForm onLogin={(email) => setAuthenticatedUserName(email)}
+                       buttonLabel="Zapis się na newsletter"/>;
+
+
+            <LoginForm onLogin={(email) => setAuthenticatedUserName(email)}
+                       buttonLabel="Zarejestruj się"/>;
+        </div>
     }
 
     return (
@@ -30,4 +40,5 @@ function App() {
         </div>
     );
 }
+
 export default App;

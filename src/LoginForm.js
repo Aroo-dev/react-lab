@@ -14,7 +14,7 @@ export default function LoginForm(props) {
 
         <button type="button" onClick={() => props.onLogin(email)}>
 
-            Wchodzę
+            {props.buttonLabel || 'Zaloguj'}
 
         </button>
 
