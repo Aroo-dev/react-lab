@@ -1,32 +1,26 @@
 import './App.css';
 import {useState} from "react";
 import "milligram"
+import LoginForm from "./LoginForm";
 
 function App() {
-    const [email, setEmail] = useState('magda@agh.edu.pl');
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    const [authenticatedUserName, setAuthenticatedUserName] = useState('');
 
 
-    function handleChange(event) {
-        setEmail(event.target.value);
-    }
 
     function logout() {
-        setIsAuthenticated(false);
-        setEmail(" ");
     }
 
+
     let content;
-    if (isAuthenticated) {
+    if (authenticatedUserName) {
         content = <div>
-            <h2>Twoj e-mail to {email}</h2>
-            <button onClick={() => setIsAuthenticated(false)}>Wyloguj się</button>
+            <h2>Twoj e-mail to {authenticatedUserName}</h2>
+            <button onClick={logout}></button>
         </div>
     } else {
-        content = <div>
-            <input type="text" onChange={handleChange}></input>
-            <button onClick={() => setIsAuthenticated(true)}>Zaloguj się</button>
-        </div>
+       content = <LoginForm onLogin={(email) => setAuthenticatedUserName(email) }/>
     }
 
     return (
