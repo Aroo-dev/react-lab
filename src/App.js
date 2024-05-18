@@ -1,61 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
 import {useState} from "react";
+import "milligram"
 
 function App() {
-
-
-    let message = <h1> Podaj adres</h1>;
-
-    const [email, setEmail] = useState('artur@agh.edu.pl');
+    const [email, setEmail] = useState('magda@agh.edu.pl');
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 
     function handleChange(event) {
-
         setEmail(event.target.value);
     }
 
-    if (message.length > 0) {
-        message = <h2>masz krótki adres </h2>
+    function logout() {
+        setIsAuthenticated(false);
+        setEmail(" ");
     }
 
-    if (email.length > 10) {
-
-        message = <div>troche dłuższy adres!</div>;
-
-    } else if (email.length > 15) {
-
-        message = <div>Twój adres e-mail jest w sam raz.</div>;
-
+    let content;
+    if (isAuthenticated) {
+        content = <div>
+            <h2>Twoj e-mail to {email}</h2>
+            <button onClick={() => setIsAuthenticated(false)}>Wyloguj się</button>
+        </div>
     } else {
-
-        message = <div>Twój adres e-mail jest stanowczo za długi.</div>;
-
-
+        content = <div>
+            <input type="text" onChange={handleChange}></input>
+            <button onClick={() => setIsAuthenticated(true)}>Zaloguj się</button>
+        </div>
     }
-
 
     return (
-
         <div>
-
             <h1>System do zapisów na zajęcia</h1>
-
-            <h2>Twój e-mail to {email}.</h2>
-            {message}
-
-            <input type="text" onChange={handleChange}/>
-            <button type="button" onClick={() => alert(email)}>
-
-                pokaz adres email w alercie.
-
-            </button>
-
+            {content}
         </div>
-
     );
-
-
 }
-
 export default App;
